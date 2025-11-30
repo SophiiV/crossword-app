@@ -1,0 +1,82 @@
+<div class="editor">
+  <!-- Верхня панель -->
+  <div class="toolbar">
+    <div class="left">
+      <input type="text" [(ngModel)]="puzzle.title" placeholder="Назва" (blur)="reindexGrid()" />
+      <input type="text" [(ngModel)]="puzzle.author" placeholder="Автор" (blur)="reindexGrid()" />
+
+      <label>Рядів
+        <input type="number" [(ngModel)]="puzzle.rows" min="3" max="25" />
+      </label>
+
+      <label>Стовпців
+        <input type="number" [(ngModel)]="puzzle.cols" min="3" max="25" />
+      </label>
+
+      <button (click)="reindexGrid()">Reindex</button>
+    </div>
+
+    <div class="right">
+      <input
+        type="file"
+        accept="application/json"
+        (change)="importFile($any($event.target).files)"
+      />
+      <button (click)="export()">Export JSON</button>
+    </div>
+  </div>
+
+  <!-- Сітка -->
+  <div class="grid-container">
+    <div
+      class="grid"
+      [style.gridTemplateColumns]="'repeat(' + puzzle.cols + ', 36px)'"
+      [style.gridAutoRows]="'36px'"
+    >
+      <!-- ПЛОСКИЙ ngFor — клітинки прямо в grid -->
+      <ng-container *ngFor="let row of puzzle.grid; let r = index">
+        <ng-container *ngFor="let cell of row; let c = index">
+          <div
+            class="tile"
+            [class.block]="cell.isBlock"
+            tabindex="0"
+            (keydown)="typeLetter(cell, $event)"
+            (dblclick)="toggleBlock(cell)"
+          >
+            <div class="num" *ngIf="!cell.isBlock && cell.number">{{ cell.number }}</div>
+            <div class="ch" *ngIf="!cell.isBlock">{{ cell.solution || '' }}</div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Підказки -->
+  <div class="clues">
+    <div class="clue-group">
+      <h4>Across</h4>
+      <div class="clue" *ngFor="let e of acrossEntries">
+        <div class="id">{{ e.number }}</div>
+        <input
+          type="text"
+          [placeholder]="'Ключ для A-' + e.number + ' (' + e.length + ')'"
+          [(ngModel)]="e.clue"
+          (blur)="setClue(e.id, e.clue)"
+        />
+      </div>
+    </div>
+
+    <div class="clue-group">
+      <h4>Down</h4>
+      <div class="clue" *ngFor="let e of downEntries">
+        <div class="id">{{ e.number }}</div>
+        <input
+          type="text"
+          [placeholder]="'Ключ для D-' + e.number + ' (' + e.length + ')'"
+          [(ngModel)]="e.clue"
+          (blur)="setClue(e.id, e.clue)"
+        />
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+.player { display:flex; flex-direction:column; gap:12px; height:100%; }
+.topbar { display:flex; justify-content:space-between; align-items:center; }
+.actions button{ margin-left:6px; background:#2563eb; color:#fff; border:0; padding:6px 10px; border-radius:6px; cursor:pointer; }
+.board-clues { display:grid; grid-template-columns: auto 1fr; gap:16px; align-items:start; }
+.board { --tile: 34px; border:1px solid #2b3340; padding:6px; background:#0b1220; }
+.row { display:grid; grid-template-columns: repeat(var(--cols), var(--tile)); }
+.cell { position:relative; width:var(--tile); height:var(--tile); background:#162033; border:1px solid #243044; display:flex; align-items:center; justify-content:center; color:#e2e8f0; }
+.cell.block { background:#0e0e10; border-color:#2b2b35; }
+.cell.sel { outline:2px solid #60a5fa; z-index:1; }
+.cell.err { background:#3a1c1c; }
+.num { position:absolute; top:2px; left:3px; font-size:9px; color:#9fb2c7; }
+.ch { font-weight:700; font-size:16px; }
+.clues { max-height: calc(100vh - 200px); overflow:auto; }
+.clue { margin-bottom:6px; color:#e2e8f0; }
+.len { color:#9fb2c7; font-size:12px; margin-left:4px; }
+.done { margin-top:12px; background:#14532d; color:#dcfce7; padding:8px 10px; border-radius:6px; }

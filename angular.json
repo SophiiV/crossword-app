@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "crossword-app": {
+    "crossword": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -66,10 +66,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "crossword-app:build:production"
+              "buildTarget": "crossword:build:production"
             },
             "development": {
-              "buildTarget": "crossword-app:build:development"
+              "buildTarget": "crossword:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -99,5 +99,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "3f979ea9-e75c-4204-8c5c-2e1aaa8b3fbe"
   }
 }

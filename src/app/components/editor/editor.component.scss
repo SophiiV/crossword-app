@@ -1,0 +1,170 @@
+:host {
+  display: block;
+  height: 100%;
+  background: #0d1117;
+  color: #e6edf3;
+  font-family: 'Inter', sans-serif;
+}
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 16px;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+/* Панель */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.left,
+.right {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+input[type='text'],
+input[type='number'] {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  color: #e6edf3;
+  border-radius: 6px;
+  padding: 6px 8px;
+  outline: none;
+  font-size: 14px;
+}
+
+input[type='text']:focus,
+input[type='number']:focus {
+  border-color: #58a6ff;
+}
+
+button {
+  background: #238636;
+  color: #f0f6fc;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease-in-out;
+}
+
+button:hover {
+  background: #2ea043;
+}
+
+/* Сітка */
+.grid-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  background: #161b22;
+  border-radius: 8px;
+  border: 1px solid #30363d;
+  padding: 10px;
+  overflow: auto;
+}
+
+.grid {
+  display: grid;
+  gap: 2px;
+  width: fit-content;
+  height: fit-content;
+}
+
+.tile {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  background: #1c2128;
+  border: 1px solid #30363d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #f0f6fc;
+  user-select: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.tile:hover {
+  background: #21262d;
+}
+
+.tile.block {
+  background: #0d1117;
+  border-color: #21262d;
+}
+
+.num {
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  font-size: 10px;
+  color: #8b949e;
+}
+
+.ch {
+  font-size: 18px;
+}
+
+/* Підказки */
+.clues {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  background: #161b22;
+  border-radius: 8px;
+  border: 1px solid #30363d;
+  padding: 12px;
+  overflow-y: auto;
+  max-height: 40vh;
+}
+
+h4 {
+  color: #f0f6fc;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.clue {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.clue .id {
+  width: 24px;
+  text-align: right;
+  color: #8b949e;
+}
+
+.clue input {
+  flex: 1;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 6px 8px;
+  color: #e6edf3;
+  font-size: 14px;
+}
+
+.clue input:focus {
+  border-color: #58a6ff;
+  outline: none;
+}

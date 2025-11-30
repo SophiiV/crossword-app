@@ -1,0 +1,49 @@
+<div class="player" tabindex="0" (keydown)="key($event)">
+  <div class="topbar">
+    <div class="meta">
+      <div class="title">{{ puzzle?.title }}</div>
+      <div class="author">by {{ puzzle?.author }}</div>
+    </div>
+    <div class="actions">
+      <button (click)="toggleDir()">Напрям: {{ dir === 'across' ? 'Across' : 'Down' }}</button>
+      <button (click)="check()">Перевірити</button>
+      <button (click)="revealCell()">Reveal Cell</button>
+      <button (click)="revealWord()">Reveal Word</button>
+      <button (click)="reset()">Скинути</button>
+    </div>
+  </div>
+
+  <div class="board-clues">
+    <!-- Сітка -->
+    <div class="board" [style.--rows]="puzzle?.rows" [style.--cols]="puzzle?.cols">
+      <div class="row" *ngFor="let row of puzzle?.grid; let r = index">
+        <div class="cell"
+             *ngFor="let cell of row; let c = index"
+             [class.block]="cell.isBlock"
+             [class.sel]="sel.r === r && sel.c === c"
+             [class.err]="!cell.isBlock && errors[r][c]"
+             (click)="clickCell(r, c)">
+          <div class="num" *ngIf="!cell.isBlock && cell.number">{{ cell.number }}</div>
+          <div class="ch" *ngIf="!cell.isBlock">{{ userGrid[r][c] }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Підказки -->
+    <div class="clues">
+      <h3>Across</h3>
+      <div class="clue" *ngFor="let e of acrossEntries">
+        <b>{{ e.number }}</b> {{ e.clue }}
+        <span class="len">({{ e.length }})</span>
+      </div>
+
+      <h3>Down</h3>
+      <div class="clue" *ngFor="let e of downEntries">
+        <b>{{ e.number }}</b> {{ e.clue }}
+        <span class="len">({{ e.length }})</span>
+      </div>
+
+      <div class="done" *ngIf="completed()">✅ Вітаю! Кросворд розв’язано.</div>
+    </div>
+  </div>
+</div>
